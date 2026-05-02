@@ -1,0 +1,146 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+body {
+    background: #0f172a;
+    color: #e5e7eb;
+    display: flex;
+    justify-content: center;
+    padding: 40px 10px;
+}
+
+/* main app */
+.app {
+    width: 100%;
+    max-width: 1000px;
+}
+
+/* title */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* form */
+.form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.form input {
+    flex: 1;
+    padding: 10px;
+    background: #1e293b;
+    border: none;
+    color: white;
+    border-radius: 6px;
+
+    &::placeholder {
+        color: #0b1320;
+    }
+
+    &:focus {
+        background: #1e293b;
+        color: white;
+    }
+}
+
+.form button {
+    padding: 10px 15px;
+    border: none;
+    background: #22c55e;
+    color: black;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* table */
+.table {
+    background: #1e293b;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* header */
+.table-header,
+.task-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr 1fr 0.8fr;
+    padding: 12px;
+    align-items: center;
+}
+
+.task-row span {
+    background: transparent;
+    color: white;
+}
+
+.table-header {
+    background: #334155;
+    font-weight: bold;
+}
+
+/* rows */
+.task-row {
+    border-top: 1px solid #334155;
+}
+
+.task-row:hover {
+    background: #273449;
+}
+
+/* status */
+.status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    text-align: start;
+}
+
+/* actions */
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.actions button {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.edit-status-btn {
+    background: #0d6efd;
+    color: white;
+}
+
+.edit {
+    background: #ffc107;
+    color: white;
+}
+
+.delete {
+    background: #ef4444;
+    color: white;
+}
+
+/* responsive */
+@media (max-width: 600px) {
+    .form {
+        flex-direction: column;
+    }
+
+    .table-header {
+        display: none;
+    }
+
+    .task-row {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+}
