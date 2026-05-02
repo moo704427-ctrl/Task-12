@@ -5,7 +5,7 @@ const tasks = [
 ];
 
 let editingIndex = null;
-let taskContainer = document.querySelector("#taskContainer");
+let taskContainer = document.querySelector("tbody");
 document.querySelector("#addUpdateTask").textContent = "Add New Task";
 
 // Read Tasks
@@ -14,31 +14,29 @@ function displayTasks(tasks) {
 
     tasks.forEach((task, taskIndex) => {
         // Task Row
-        let taskRow = document.createElement("div");
-        taskRow.classList.add("task-row");
+        let taskRow = document.createElement("tr");
 
         // Task Number
-        let taskNumber = document.createElement("span");
+        let taskNumber = document.createElement("td");
         taskNumber.textContent = taskIndex + 1;
 
         // Task Name
-        let taskName = document.createElement("span");
+        let taskName = document.createElement("td");
         taskName.textContent = task.taskName;
 
         // Task Description
-        let taskDesc = document.createElement("span");
+        let taskDesc = document.createElement("td");
         taskDesc.textContent = task.taskDesc;
 
         // Task Status
-        let taskStatus = document.createElement("span");
+        let taskStatus = document.createElement("td");
         taskStatus.classList.add("status");
         taskStatus.classList.add(`text-${task.taskStatus ? "success" : "danger"}`);
         taskStatus.textContent = task.taskStatus ? "completed" : "waiting";
 
         // Task Actions
-        let actions = document.createElement("div");
+        let actions = document.createElement("td");
         actions.classList.add("actions");
-        actions.classList.add("bg-transparent");
 
         // Edit Status Button
         let editStatusBtn = document.createElement("button");
@@ -87,6 +85,7 @@ function displayTasks(tasks) {
         taskContainer.append(taskRow);
     });
 }
+displayTasks(tasks);
 
 // Filter Tasks
 function filterTasks(taskCategory) {

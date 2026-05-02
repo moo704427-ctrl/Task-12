@@ -13,19 +13,18 @@ body {
     padding: 40px 10px;
 }
 
-/* main app */
+/* APP CONTAINER */
 .app {
     width: 100%;
-    max-width: 1000px;
 }
 
-/* title */
+/* TITLE */
 h1 {
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* form */
+/* FORM */
 .form {
     display: flex;
     gap: 10px;
@@ -39,15 +38,16 @@ h1 {
     border: none;
     color: white;
     border-radius: 6px;
+    outline: none;
+}
 
-    &::placeholder {
-        color: #0b1320;
-    }
+.form input::placeholder {
+    color: #64748b;
+}
 
-    &:focus {
-        background: #1e293b;
-        color: white;
-    }
+.form input:focus {
+    color: #64748b;
+    background-color: #1e293b;
 }
 
 .form button {
@@ -59,61 +59,66 @@ h1 {
     cursor: pointer;
 }
 
-/* table */
-.table {
+
+/* TABLE WRAPPER (IMPORTANT) */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 10px;
+}
+
+/* TABLE */
+table {
+    width: 100%;
     background: #1e293b;
     border-radius: 10px;
     overflow: hidden;
+    table-layout: fixed;
 }
 
-/* header */
-.table-header,
-.task-row {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    padding: 12px;
-    align-items: center;
-}
-
-.task-row span {
-    background: transparent;
-    color: white;
-}
-
-.table-header {
+/* HEADER */
+table thead {
     background: #334155;
-    font-weight: bold;
 }
 
-/* rows */
-.task-row {
+table th {
+    padding: 14px;
+    text-align: start;
+    font-weight: bold;
+    overflow-wrap: break-word;
+}
+
+/* BODY CELLS */
+table td {
+    padding: 14px;
+    overflow-wrap: break-word;
+}
+
+table tbody tr {
     border-top: 1px solid #334155;
 }
 
-.task-row:hover {
+/* ROW HOVER */
+table tbody tr:hover {
     background: #273449;
 }
 
-/* status */
-.status {
-    padding: 5px 10px;
-    border-radius: 20px;
-    text-align: start;
-}
-
-/* actions */
+/* ACTION BUTTONS */
 .actions {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
 .actions button {
+    flex: 1;
     border: none;
     padding: 6px 10px;
     border-radius: 5px;
     cursor: pointer;
 }
 
+/* EDIT / DELETE */
 .edit-status-btn {
     background: #0d6efd;
     color: white;
@@ -121,7 +126,7 @@ h1 {
 
 .edit {
     background: #ffc107;
-    color: white;
+    color: black;
 }
 
 .delete {
@@ -129,18 +134,27 @@ h1 {
     color: white;
 }
 
-/* responsive */
-@media (max-width: 600px) {
+/* RESPONSIVE (MOBILE) */
+@media (max-width: 768px) {
     .form {
         flex-direction: column;
     }
 
-    .table-header {
-        display: none;
+    table {
+        min-width: 650px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 20px 10px;
     }
 
-    .task-row {
-        grid-template-columns: 1fr;
-        gap: 5px;
+    table {
+        min-width: 600px;
+    }
+
+    h1 {
+        font-size: 22px;
     }
 }
