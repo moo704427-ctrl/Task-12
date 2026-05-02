@@ -70,7 +70,7 @@ h1 {
 .table-header,
 .task-row {
     display: grid;
-    grid-template-columns: 1fr 1fr 2fr 1fr 0.8fr;
+    grid-template-columns: repeat(5, 1fr);
     padding: 12px;
     align-items: center;
 }
