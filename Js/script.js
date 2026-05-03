@@ -31,8 +31,8 @@ function displayTasks(tasks) {
         // Task Status
         let taskStatus = document.createElement("td");
         taskStatus.classList.add("status");
-        taskStatus.classList.add(`text-${task.taskStatus ? "success" : "danger"}`);
-        taskStatus.textContent = task.taskStatus ? "completed" : "waiting";
+        taskStatus.classList.add(`text-${task.taskStatus ? "success" : "warning"}`);
+        taskStatus.textContent = task.taskStatus ? "Completed" : "Waiting";
 
         // Task Actions
         let actions = document.createElement("td");
@@ -102,14 +102,20 @@ function filterTasks(taskCategory) {
     }
 }
 
-document.querySelector("#All").addEventListener("click", () => {
+document.querySelector("#all").addEventListener("click", () => {
     displayTasks(tasks);
 });
-document.querySelector("#Completed").addEventListener("click", () => {
+document.querySelector("#completed").addEventListener("click", () => {
     filterTasks("completed");
 });
-document.querySelector("#Waiting").addEventListener("click", () => {
+document.querySelector("#waiting").addEventListener("click", () => {
     filterTasks("waiting");
+});
+
+// Clear All Tasks
+document.querySelector("#clear").addEventListener("click", () => {
+    tasks.splice(0);
+    displayTasks(tasks);
 });
 
 // Add Tasks
