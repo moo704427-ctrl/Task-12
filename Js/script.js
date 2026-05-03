@@ -1,12 +1,13 @@
-const tasks = [
-    { taskName: "Gym", taskDesc: "Play cardio", taskStatus: true },
-    { taskName: "Cinema", taskDesc: "Watch movie", taskStatus: false },
-    { taskName: "Study", taskDesc: "Do math homework", taskStatus: true }
-];
+const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
 let editingIndex = null;
 let taskContainer = document.querySelector("tbody");
 document.querySelector("#addUpdateTask").textContent = "Add New Task";
+
+// Save Edits In The Local Storage
+function saveTasks() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
 
 // Read Tasks
 function displayTasks(tasks) {
@@ -46,6 +47,7 @@ function displayTasks(tasks) {
         // Edit Status
         editStatusBtn.addEventListener("click", () => {
             task.taskStatus = !task.taskStatus;
+            saveTasks();
             displayTasks(tasks);
         });
 
@@ -54,7 +56,7 @@ function displayTasks(tasks) {
         editBtn.classList.add("edit");
         editBtn.textContent = "Edit";
 
-        // Edit Tasks
+        // Edit Tasks (Update)
         editBtn.addEventListener("click", () => {
             inputTaskName.value = task.taskName;
             inputTaskDesc.value = task.taskDesc;
@@ -72,6 +74,7 @@ function displayTasks(tasks) {
         // Delete Tasks
         deleteBtn.addEventListener("click", () => {
             tasks.splice(taskIndex, 1);
+            saveTasks();
             displayTasks(tasks);
         });
 
@@ -115,6 +118,8 @@ document.querySelector("#waiting").addEventListener("click", () => {
 // Clear All Tasks
 document.querySelector("#clear").addEventListener("click", () => {
     tasks.splice(0);
+    localStorage.removeItem("tasks"); // This is Better than clear()
+    // localStorage.clear(); => Delete everything in the browser not just tasks
     displayTasks(tasks);
 });
 
@@ -126,24 +131,34 @@ document.querySelector("#addUpdateTask").addEventListener('click', () => {
     const name = inputTaskName.value;
     const desc = inputTaskDesc.value;
 
+    let isExist = tasks.find((task, index) => {
+        return task.taskName === name;
+    });
+
     if (editingIndex !== null) {
         // Update Task
         tasks[editingIndex].taskName = name;
         tasks[editingIndex].taskDesc = desc;
+        saveTasks();
 
         editingIndex = null;
         document.querySelector("#addUpdateTask").textContent = "Add New Task";
+    } else if (isExist) {
+        alert("This task name is already uesd please enter another name");
     } else {
         // Add Task
-        tasks.push({
+        let newTask = {
             taskName: name,
             taskDesc: desc,
             taskStatus: false
-        });
-    }
+        };
 
+        tasks.push(newTask);
+        saveTasks();
+    }
     inputTaskName.value = "";
     inputTaskDesc.value = "";
 
     displayTasks(tasks);
+
 });
